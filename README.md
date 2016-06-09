@@ -1,6 +1,6 @@
 # Introduction
 
-This is a set of build files including a Dockerfile to build a container image for nginx(with http2 support) and php-fpm based on Alpine Linux to keep the size of the container small, and inspired by the work done by [Ric Harvey](https://github.com/ngineered/alpine-nginx-php-fpm). The container can also use environment variables to configure your web application using the templating detailed in the special features section.
+This is a set of build files including a Dockerfile to build a container image for nginx(with http2 support) and php-fpm based on Alpine Linux to keep the size of the container small, and inspired by the work done by [Ric Harvey](https://github.com/ngineered/nginx-php-fpm). The container can also use environment variables to configure your web application using the templating detailed in the special features section.
 
 # Git repository
 

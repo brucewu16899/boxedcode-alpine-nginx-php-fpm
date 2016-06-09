@@ -4,8 +4,8 @@ FROM alpine:3.4
 MAINTAINER boxedcode <hello@boxedcode.com>
 
 # Environment variables
-ENV BUILD_PACKAGES="wget tar make gcc g++ zlib-dev openssl-dev pcre-dev fcgi-dev jpeg-dev libmcrypt-dev bzip2-dev curl-dev libpng-dev libxslt-dev postgresql-dev perl-dev" \
-    ESSENTIAL_PACKAGES="nginx openssl pcre zlib supervisor sed re2c m4" \
+ENV BUILD_PACKAGES="wget tar make gcc g++ zlib-dev openssl-dev pcre-dev fcgi-dev jpeg-dev libmcrypt-dev bzip2-dev curl-dev libpng-dev libxslt-dev postgresql-dev perl-dev file acl-dev libedit-dev" \
+    ESSENTIAL_PACKAGES="nginx openssl pcre zlib supervisor sed re2c m4 ca-certificates" \
     UTILITY_PACKAGES="bash vim"
 
 # Configure nginx
@@ -19,15 +19,6 @@ RUN apk update && \
     mkdir -p /var/www/html/ && \
     chmod -R 775 /var/www/ && \
     chown -R nginx:nginx /var/www/
-
-# Replace the default nginx.conf file
-COPY ./nginx.conf /etc/nginx/nginx.conf
-
-# tweak nginx config
-RUN sed -i -e"s/worker_processes  1/worker_processes 5/" /etc/nginx/nginx.conf && \
-    sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf && \
-    sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf && \
-    echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Build and configure php/php-fpm
 RUN apk --no-cache --progress add $BUILD_PACKAGES && \
@@ -58,20 +49,12 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     --prefix=/usr \
     --with-config-file-path=/etc \
     --with-config-file-scan-dir=/etc/php.d \
-    --with-pdo-pgsql \
+    --disable-cgi \
     --enable-mbstring \
     --enable-mysqlnd \
-    --with-libxml-dir=/usr \
     --enable-soap \
     --enable-calendar \
-    --with-curl \
-    --with-mcrypt \
-    --with-zlib \
-    --with-gd \
-    --with-pgsql \
     --enable-inline-optimization \
-    --with-bz2 \
-    --with-zlib \
     --enable-sockets \
     --enable-sysvsem \
     --enable-sysvshm \
@@ -79,37 +62,45 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     --enable-mbregex \
     --enable-exif \
     --enable-bcmath \
-    --with-mhash \
     --enable-zip \
+    --enable-ftp \
+    --enable-opcache \
+    --enable-fpm \
+    --enable-gd-native-ttf \
+    --with-pdo-pgsql \
+    --with-libedit \
+    --with-libxml-dir=/usr \
+    --with-curl \
+    --with-mcrypt \
+    --with-zlib \
+    --with-gd \
+    --with-pgsql \
+    --with-bz2 \
+    --with-zlib \
+    --with-mhash \
     --with-pcre-regex \
     --with-pdo-mysql \
     --with-jpeg-dir=/usr \
     --with-png-dir=/usr \
-    --enable-gd-native-ttf \
     --with-openssl \
     --with-fpm-user=nginx \
     --with-fpm-group=nginx \
     --with-libdir=/usr/lib \
-    --enable-ftp \
     --with-gettext \
     --with-xmlrpc \
     --with-xsl \
-    --with-pear \
-    --enable-opcache \
-    --enable-fpm && \
+    --with-pear && \
     make && \
     make install && \
     make clean && \
     cd .. && \
     rm -f php-7.0.7.tar.gz && \
     rm -rf php-7.0.7 && \
-    apk del build-base alpine-sdk
+    mkdir -p /etc/php.d && \
+    chmod 755 /etc/php.d
 
-# Supervisor Config
-COPY ./supervisord.conf /etc/supervisord.conf
-
-# Entrypoint for triggering supervisord
-COPY ./entrypoint.sh /entrypoint.sh
+# Copy manifest folder
+COPY ./manifest/ /
 RUN chmod 755 /entrypoint.sh
 
 # Setup Volume

@@ -4,13 +4,13 @@ This is a set of build files including a Dockerfile to build a container image f
 
 # Git repository
 
-The source files for this project can be found here: [https://gitlab.com/boxedcode/alpine-alpine-nginx-php-fpm](https://gitlab.com/boxedcode/alpine-alpine-nginx-php-fpm)
+The source files for this project can be found here: [https://gitlab.com/boxedcode/alpine-nginx-php-fpm](https://gitlab.com/boxedcode/alpine-nginx-php-fpm)
 
 If you have any improvements please submit a pull request.
 
 # Docker hub repository
 
-The Docker hub build can be found here: [https://hub.docker.com/r/boxedcode/alpine-alpine-nginx-php-fpm/](https://hub.docker.com/r/boxedcode/alpine-alpine-nginx-php-fpm/)
+The Docker hub build can be found here: [https://hub.docker.com/r/boxedcode/alpine-nginx-php-fpm/](https://hub.docker.com/r/boxedcode/alpine-nginx-php-fpm/)
 
 # Nginx versions
 

@@ -38,7 +38,7 @@ To simply run the container:
 
     sudo docker run --name nginx -p 443:443 -d boxedcode/alpine-nginx-php-fpm
 
-You can then browse to https://<docker_host>:443 to view the default index.php file which shows the output of phpinfo()
+You can then browse to https://{docker_host}:443 to view the default index.php file which shows the output of phpinfo()
 
 ## Volumes
 

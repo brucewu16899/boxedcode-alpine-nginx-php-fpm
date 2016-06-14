@@ -98,7 +98,8 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     rm -rf php-7.0.7 && \
     mkdir -p /etc/php.d && \
     chmod 755 /etc/php.d && \
-    mkdir -p /usr/lib/php/modules
+    mkdir -p /usr/lib/php/modules && \
+    ln -s /usr/lib/php/extensions/no-debug-non-zts-20151012/opcache.so /usr/lib/php/modules/opcache.so
 
 # Copy manifest folder
 COPY ./manifest/ /

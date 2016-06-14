@@ -97,7 +97,8 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     rm -f php-7.0.7.tar.gz && \
     rm -rf php-7.0.7 && \
     mkdir -p /etc/php.d && \
-    chmod 755 /etc/php.d
+    chmod 755 /etc/php.d && \
+    mkdir -p /usr/lib/php/modules
 
 # Copy manifest folder
 COPY ./manifest/ /

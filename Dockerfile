@@ -8,7 +8,7 @@ ENV BUILD_PACKAGES="wget tar make gcc g++ zlib-dev openssl-dev pcre-dev fcgi-dev
     ESSENTIAL_PACKAGES="nginx openssl pcre zlib supervisor sed re2c m4 ca-certificates py-pip" \
     UTILITY_PACKAGES="bash vim"
 
-# Configure nginx
+# Configure essential and utility packages
 RUN apk update && \
     apk --no-cache --progress add $ESSENTIAL_PACKAGES $UTILITY_PACKAGES && \
     mkdir -p /run/nginx/ && \
@@ -18,7 +18,9 @@ RUN apk update && \
     mkdir -p /etc/nginx/ssl/ && \
     mkdir -p /var/www/html/ && \
     chmod -R 775 /var/www/ && \
-    chown -R nginx:nginx /var/www/
+    chown -R nginx:nginx /var/www/ && \
+    pip install --upgrade pip && \
+    pip install supervisor-stdout
 
 
 # Build and configure php/php-fpm
@@ -101,10 +103,6 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     chmod 755 /etc/php.d && \
     mkdir -p /usr/lib/php/modules && \
     ln -s /usr/lib/php/extensions/no-debug-non-zts-20151012/opcache.so /usr/lib/php/modules/opcache.so
-
-# Configure supervisor
-RUN pip install --upgrade pip && \
-    pip install supervisor-stdout
 
 # Copy manifest folder
 COPY ./manifest/ /

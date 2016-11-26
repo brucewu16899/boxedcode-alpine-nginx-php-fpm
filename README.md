@@ -17,6 +17,7 @@ The Docker hub build can be found here: [https://hub.docker.com/r/boxedcode/alpi
 * v1.0.0: 1.10.1
 * v1.1.0: 1.10.1
 * v1.2.0: 1.10.1
+* v1.3.0: 1.10.1
 * Latest: 1.10.1
 
 # PHP FPM versions
@@ -24,7 +25,8 @@ The Docker hub build can be found here: [https://hub.docker.com/r/boxedcode/alpi
 * v1.0.0: 7.0.7
 * v1.1.0: 7.0.8
 * v1.2.0: 7.0.11
-* Latest: 7.0.11
+* v1.3.0: 7.0.13
+* Latest: 7.0.13
 
 ## Installation
 
@@ -32,9 +34,9 @@ Pull the image from the docker index rather than downloading the git repo. This 
 
 docker pull boxedcode/alpine-nginx-php-fpm:latest
 
-To pull the v1.2.0 Version:
+To pull the v1.3.0 Version:
 
-docker pull boxedcode/alpine-nginx-php-fpm:v1.2.0
+docker pull boxedcode/alpine-nginx-php-fpm:v1.3.0
 
 ## Run the container
 
@@ -54,13 +56,13 @@ If you want to link to your web site directory on the docker host to the contain
     
 ### Logging
 
-By default, all logging is sent to stdout (stderr does not appear to work for nginx), which facilitates using logging drivers for the docker container with tools such as fluentd etc. More information on docker containers and logging can be found [here](https://docs.docker.com/engine/admin/logging/overview/)
+By default, all logging is sent to stdout and stderr, which facilitates using logging drivers for the docker container with tools such as fluentd etc. More information on docker containers and logging can be found [here](https://docs.docker.com/engine/admin/logging/overview/)
 
 However, if you want to manage logging the old fashioned way with files, you can manage your log files on your docker host by linking to the nginx log directory in the container by running:
 
     sudo docker run --name nginx -p 443:443 -v /your_log_directory:/var/log/nginx -d boxedcode/alpine-nginx-php-fpm
 
-**Note:** If you want to manage logging the old fashioned way, you will need to override the default logging directives in your nginx configuration file to log to the nginx log file directory, i.e.
+**Note:** To manage logging the old fashioned way, you will need to override the default logging directives in your nginx configuration file to log to the nginx log file directory, i.e.
     
     access_log /var/log/nginx/<your_access_log_file>;
     error_log /var/log/nginx/<your_error_log_file>;

@@ -5,7 +5,7 @@ MAINTAINER boxedcode <hello@boxedcode.com>
 
 # Environment variables
 ENV BUILD_PACKAGES="wget tar make gcc g++ zlib-dev openssl-dev pcre-dev fcgi-dev jpeg-dev libmcrypt-dev bzip2-dev curl-dev libpng-dev libxslt-dev postgresql-dev perl-dev file acl-dev libedit-dev" \
-    ESSENTIAL_PACKAGES="nginx openssl pcre zlib supervisor sed re2c m4 ca-certificates" \
+    ESSENTIAL_PACKAGES="nginx openssl pcre zlib supervisor sed re2c m4 ca-certificates py-pip" \
     UTILITY_PACKAGES="bash vim"
 
 # Configure nginx
@@ -19,6 +19,7 @@ RUN apk update && \
     mkdir -p /var/www/html/ && \
     chmod -R 775 /var/www/ && \
     chown -R nginx:nginx /var/www/
+
 
 # Build and configure php/php-fpm
 RUN apk --no-cache --progress add $BUILD_PACKAGES && \
@@ -42,9 +43,9 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     cd .. && \
     rm -f bison-3.0.4.tar.gz && \
     rm -rf bison-3.0.4 && \
-    wget http://de1.php.net/get/php-7.0.11.tar.gz/from/this/mirror -O php-7.0.11.tar.gz && \
-    tar -zxvf php-7.0.11.tar.gz && \
-    cd php-7.0.11 && \
+    wget http://de1.php.net/get/php-7.0.13.tar.gz/from/this/mirror -O php-7.0.13.tar.gz && \
+    tar -zxvf php-7.0.13.tar.gz && \
+    cd php-7.0.13 && \
     ./configure \
     --prefix=/usr \
     --with-config-file-path=/etc \
@@ -94,12 +95,16 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     make install && \
     make clean && \
     cd .. && \
-    rm -f php-7.0.11.tar.gz && \
-    rm -rf php-7.0.11 && \
+    rm -f php-7.0.13.tar.gz && \
+    rm -rf php-7.0.13 && \
     mkdir -p /etc/php.d && \
     chmod 755 /etc/php.d && \
     mkdir -p /usr/lib/php/modules && \
     ln -s /usr/lib/php/extensions/no-debug-non-zts-20151012/opcache.so /usr/lib/php/modules/opcache.so
+
+# Configure supervisor
+RUN pip install --upgrade pip && \
+    pip install supervisor-stdout
 
 # Copy manifest folder
 COPY ./manifest/ /

@@ -45,9 +45,9 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     cd .. && \
     rm -f bison-3.0.4.tar.gz && \
     rm -rf bison-3.0.4 && \
-    wget http://de1.php.net/get/php-7.0.13.tar.gz/from/this/mirror -O php-7.0.13.tar.gz && \
-    tar -zxvf php-7.0.13.tar.gz && \
-    cd php-7.0.13 && \
+    wget http://de1.php.net/get/php-7.0.14.tar.gz/from/this/mirror -O php-7.0.14.tar.gz && \
+    tar -zxvf php-7.0.14.tar.gz && \
+    cd php-7.0.14 && \
     ./configure \
     --prefix=/usr \
     --with-config-file-path=/etc \
@@ -97,8 +97,8 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     make install && \
     make clean && \
     cd .. && \
-    rm -f php-7.0.13.tar.gz && \
-    rm -rf php-7.0.13 && \
+    rm -f php-7.0.14.tar.gz && \
+    rm -rf php-7.0.14 && \
     mkdir -p /etc/php.d && \
     chmod 755 /etc/php.d && \
     mkdir -p /usr/lib/php/modules && \

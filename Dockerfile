@@ -25,16 +25,16 @@ RUN apk update && \
 
 # Build and configure php/php-fpm
 RUN apk --no-cache --progress add $BUILD_PACKAGES && \
-    wget http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.tar.gz && \
-    tar -zxvf gettext-0.19.tar.gz && \
-    cd gettext-0.19 && \
+    wget http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.8.tar.gz && \
+    tar -zxvf gettext-0.19.8.tar.gz && \
+    cd gettext-0.19.8 && \
     ./configure && \
     make && \
     make install && \
     make clean && \
     cd .. && \
-    rm -f gettext-0.19.tar.gz && \
-    rm -rf gettext-0.19 && \
+    rm -f gettext-0.19.8.tar.gz && \
+    rm -rf gettext-0.19.8 && \
     wget http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.gz && \
     tar -zxvf bison-3.0.4.tar.gz && \
     cd bison-3.0.4 && \
@@ -45,9 +45,9 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     cd .. && \
     rm -f bison-3.0.4.tar.gz && \
     rm -rf bison-3.0.4 && \
-    wget http://de1.php.net/get/php-7.0.14.tar.gz/from/this/mirror -O php-7.0.14.tar.gz && \
-    tar -zxvf php-7.0.14.tar.gz && \
-    cd php-7.0.14 && \
+    wget http://de1.php.net/get/php-7.1.3.tar.gz/from/this/mirror -O php-7.1.3.tar.gz && \
+    tar -zxvf php-7.1.3.tar.gz && \
+    cd php-7.1.3 && \
     ./configure \
     --prefix=/usr \
     --with-config-file-path=/etc \
@@ -97,12 +97,12 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     make install && \
     make clean && \
     cd .. && \
-    rm -f php-7.0.14.tar.gz && \
-    rm -rf php-7.0.14 && \
+    rm -f php-7.1.3.tar.gz && \
+    rm -rf php-7.1.3 && \
     mkdir -p /etc/php.d && \
     chmod 755 /etc/php.d && \
     mkdir -p /usr/lib/php/modules && \
-    ln -s /usr/lib/php/extensions/no-debug-non-zts-20151012/opcache.so /usr/lib/php/modules/opcache.so
+    ln -s /usr/lib/php/extensions/no-debug-non-zts-20160303/opcache.so /usr/lib/php/modules/opcache.so
 
 # Copy manifest folder
 COPY ./manifest/ /

@@ -3,10 +3,14 @@
 FROM alpine:3.4
 MAINTAINER boxedcode <hello@boxedcode.com>
 
+# Set PHP version (allow it to be overridden at build time)
+ARG PHP_VER="7.1.3"
+
 # Environment variables
 ENV BUILD_PACKAGES="wget tar make gcc g++ zlib-dev openssl-dev pcre-dev fcgi-dev jpeg-dev libmcrypt-dev bzip2-dev curl-dev libpng-dev libxslt-dev postgresql-dev perl-dev file acl-dev libedit-dev" \
     ESSENTIAL_PACKAGES="nginx openssl pcre zlib supervisor sed re2c m4 ca-certificates py-pip" \
-    UTILITY_PACKAGES="bash vim"
+    UTILITY_PACKAGES="bash vim" \
+    PHP_VER=${PHP_VER}
 
 # Configure essential and utility packages
 RUN apk update && \
@@ -45,9 +49,9 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     cd .. && \
     rm -f bison-3.0.4.tar.gz && \
     rm -rf bison-3.0.4 && \
-    wget http://de1.php.net/get/php-7.1.3.tar.gz/from/this/mirror -O php-7.1.3.tar.gz && \
-    tar -zxvf php-7.1.3.tar.gz && \
-    cd php-7.1.3 && \
+    wget http://de1.php.net/get/php-${PHP_VER}.tar.gz/from/this/mirror -O php-${PHP_VER}.tar.gz && \
+    tar -zxvf php-${PHP_VER}.tar.gz && \
+    cd php-${PHP_VER} && \
     ./configure \
     --prefix=/usr \
     --with-config-file-path=/etc \
@@ -97,8 +101,8 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     make install && \
     make clean && \
     cd .. && \
-    rm -f php-7.1.3.tar.gz && \
-    rm -rf php-7.1.3 && \
+    rm -f php-${PHP_VER}.tar.gz && \
+    rm -rf php-${PHP_VER} && \
     mkdir -p /etc/php.d && \
     chmod 755 /etc/php.d && \
     mkdir -p /usr/lib/php/modules && \

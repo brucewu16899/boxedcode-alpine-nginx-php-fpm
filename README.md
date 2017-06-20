@@ -1,6 +1,6 @@
 # Introduction
 
-This is a set of build files including a Dockerfile to build a container image for nginx(with http2 support) and php-fpm based on Alpine Linux to keep the size of the container small, and inspired by the work done by [Ric Harvey](https://github.com/ngineered/nginx-php-fpm). The container can also use environment variables to configure your web application using the templating detailed in the special features section.
+This is a set of build files including a Dockerfile to build a container image for nginx(with http2 support) and php-fpm based on [Alpine Linux](https://alpinelinux.org/) to keep the size of the container small, and inspired by the work done by [Ric Harvey](https://github.com/ngineered/nginx-php-fpm). The container can also use environment variables to configure your web application using the templating detailed in the special features section.
 
 # Git repository
 
@@ -20,7 +20,10 @@ The Docker hub build can be found here: [https://hub.docker.com/r/boxedcode/alpi
 * v1.3.0: 1.10.1
 * v1.3.1: 1.10.1
 * v1.3.2: 1.10.1
-* Latest: 1.10.1
+* v1.4.0: 1.10.1
+* v1.4.1: 1.10.1
+* v1.5.0: 1.10.3
+* Latest: 1.10.3
 
 # PHP FPM versions
 
@@ -32,7 +35,8 @@ The Docker hub build can be found here: [https://hub.docker.com/r/boxedcode/alpi
 * v1.3.2: 7.0.14
 * v1.4.0: 7.1.3
 * v1.4.1: 7.1.3
-* Latest: 7.1.3
+* v1.5.0: 7.1.6
+* Latest: 7.1.6
 
 ## Installation
 
@@ -40,9 +44,9 @@ Pull the image from the docker index rather than downloading the git repo. This 
 
 docker pull boxedcode/alpine-nginx-php-fpm:latest
 
-To pull the v1.4.1 Version:
+To pull the v1.5.0 Version:
 
-docker pull boxedcode/alpine-nginx-php-fpm:v1.4.1
+docker pull boxedcode/alpine-nginx-php-fpm:v1.5.0
 
 ## Run the container
 

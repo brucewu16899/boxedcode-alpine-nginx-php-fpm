@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v1.5.0] - 2017-06-20
+### Changed
+- Bumped up Alpine version to 3.5
+- Replaced OpenSSL with LibreSSL
+- Bumped up PHP version to 7.1.6
+- Bumped up Nginx version to 1.10.3
+
 ## [v1.4.1] - 2017-06-19
 ### Changed
 - Including MySQLi support
@@ -46,7 +53,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial tag
 
-[Unreleased]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.4.1...master
+[Unreleased]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.5.0...master
+[v1.5.0]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.4.1...v1.5.0
 [v1.4.1]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.4.0...v1.4.1
 [v1.4.0]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.3.2...v1.4.0
 [v1.3.2]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.3.1...v1.3.2

@@ -1,16 +1,17 @@
 # boxedcode/alpine-nginx-php-fpm
 
-FROM alpine:3.4
+FROM alpine:3.5
 MAINTAINER boxedcode <hello@boxedcode.com>
 
 # Set PHP version (allow it to be overridden at build time)
-ARG PHP_VER="7.1.3"
+ARG PHP_VER="7.1.6"
 
 # Environment variables
-ENV BUILD_PACKAGES="wget tar make gcc g++ zlib-dev openssl-dev pcre-dev fcgi-dev jpeg-dev libmcrypt-dev bzip2-dev curl-dev libpng-dev libxslt-dev postgresql-dev perl-dev file acl-dev libedit-dev" \
-    ESSENTIAL_PACKAGES="nginx openssl pcre zlib supervisor sed re2c m4 ca-certificates py-pip" \
+ENV BUILD_PACKAGES="wget tar make gcc g++ zlib-dev libressl-dev pcre-dev fcgi-dev jpeg-dev libmcrypt-dev bzip2-dev curl-dev libpng-dev libxslt-dev postgresql-dev perl-dev file acl-dev libedit-dev" \
+    ESSENTIAL_PACKAGES="nginx libressl pcre zlib supervisor sed re2c m4 ca-certificates py-pip" \
     UTILITY_PACKAGES="bash vim" \
-    PHP_VER=${PHP_VER}
+    PHP_VER=${PHP_VER} \
+    GETTEXT_VER="0.19.8.1"
 
 # Configure essential and utility packages
 RUN apk update && \
@@ -29,16 +30,16 @@ RUN apk update && \
 
 # Build and configure php/php-fpm
 RUN apk --no-cache --progress add $BUILD_PACKAGES && \
-    wget http://ftp.gnu.org/pub/gnu/gettext/gettext-0.19.8.tar.gz && \
-    tar -zxvf gettext-0.19.8.tar.gz && \
-    cd gettext-0.19.8 && \
+    wget http://ftp.gnu.org/pub/gnu/gettext/gettext-${GETTEXT_VER}.tar.gz && \
+    tar -zxvf gettext-${GETTEXT_VER}.tar.gz && \
+    cd gettext-${GETTEXT_VER} && \
     ./configure && \
     make && \
     make install && \
     make clean && \
     cd .. && \
-    rm -f gettext-0.19.8.tar.gz && \
-    rm -rf gettext-0.19.8 && \
+    rm -f gettext-${GETTEXT_VER}.tar.gz && \
+    rm -rf gettext-${GETTEXT_VER} && \
     wget http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.gz && \
     tar -zxvf bison-3.0.4.tar.gz && \
     cd bison-3.0.4 && \
@@ -49,7 +50,7 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     cd .. && \
     rm -f bison-3.0.4.tar.gz && \
     rm -rf bison-3.0.4 && \
-    wget http://de1.php.net/get/php-${PHP_VER}.tar.gz/from/this/mirror -O php-${PHP_VER}.tar.gz && \
+    wget http://de2.php.net/get/php-${PHP_VER}.tar.gz/from/this/mirror -O php-${PHP_VER}.tar.gz && \
     tar -zxvf php-${PHP_VER}.tar.gz && \
     cd php-${PHP_VER} && \
     ./configure \

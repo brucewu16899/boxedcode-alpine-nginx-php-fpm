@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v1.4.1] - 2017-06-19
+### Changed
+- Including MySQLi support
+
 ## [v1.4.0] - 2017-03-25
 ### Changed
 - Bumped up PHP version to 7.1.3
@@ -42,7 +46,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial tag
 
-[Unreleased]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.4.0...master
+[Unreleased]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.4.1...master
+[v1.4.1]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.4.0...v1.4.1
 [v1.4.0]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.3.2...v1.4.0
 [v1.3.2]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.3.1...v1.3.2
 [v1.3.1]: https://gitlab.com/boxedcode/alpine-nginx-php-fpm/compare/v1.3.0...v1.3.1

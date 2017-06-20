@@ -96,7 +96,8 @@ RUN apk --no-cache --progress add $BUILD_PACKAGES && \
     --with-gettext \
     --with-xmlrpc \
     --with-xsl \
-    --with-pear && \
+    --with-pear \
+    --with-mysqli && \
     make && \
     make install && \
     make clean && \

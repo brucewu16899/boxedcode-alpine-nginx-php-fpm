@@ -23,6 +23,7 @@ The Docker hub build can be found here: [https://hub.docker.com/r/boxedcode/alpi
 * v1.4.0: 1.10.1
 * v1.4.1: 1.10.1
 * v1.5.0: 1.10.3
+* v1.5.1: 1.10.3
 * Latest: 1.10.3
 
 # PHP FPM versions
@@ -36,6 +37,7 @@ The Docker hub build can be found here: [https://hub.docker.com/r/boxedcode/alpi
 * v1.4.0: 7.1.3
 * v1.4.1: 7.1.3
 * v1.5.0: 7.1.6
+* v1.5.1: 7.1.6
 * Latest: 7.1.6
 
 ## Installation
@@ -44,9 +46,9 @@ Pull the image from the docker index rather than downloading the git repo. This 
 
 docker pull boxedcode/alpine-nginx-php-fpm:latest
 
-To pull the v1.5.0 Version:
+To pull the v1.5.1 Version:
 
-docker pull boxedcode/alpine-nginx-php-fpm:v1.5.0
+docker pull boxedcode/alpine-nginx-php-fpm:v1.5.1
 
 ## Run the container
 
